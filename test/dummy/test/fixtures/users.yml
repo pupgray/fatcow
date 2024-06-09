@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+no_status:
+  name:
+
+name_icon:
+  name: 'hello'
+
+special_icon:
+  name: 'special'

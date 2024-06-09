@@ -3,12 +3,28 @@
 require 'nokogiri'
 
 module Fatcow
-  class Icon < Struct.new(:name, :status)
+  class Icon
+    attr_reader :name, :status, :app
+
     def initialize(app, name, status = nil)
-      raise "Must provide rails app instance" unless app
-      raise "Must provide a name for icon" unless name
       @app = app
-      super(name, status)
+      @name = name
+      @status = status
+    end
+
+    def status=(new_status)
+      @status = new_status
+      clear_document
+    end
+
+    def name=(new_name)
+      @name = new_name
+      clear_document
+    end
+
+    def app=(new_app)
+      @app = new_app
+      clear_document
     end
 
     def to_html
@@ -56,6 +72,10 @@ module Fatcow
     end
 
     private
+
+    def clear_document
+      @document = nil
+    end
 
     def bullet_class
       prealigned_bullets = %i[archive attach back bell brush bug bulb_off bulb_on burn camera cd chart code_red code connect database document down dvd edit excel find flash gear lightning link magnify medal office palette php powerpoint table textfield up valid vector word world user]

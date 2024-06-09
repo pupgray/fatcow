@@ -4,12 +4,14 @@ require 'nokogiri'
 
 module Fatcow
   class Icon
-    attr_reader :name, :status, :app
+    attr_reader :name, :status, :app, :size
 
-    def initialize(app, name, status = nil)
+    def initialize(app, name, status = nil, **options)
       @app = app
       @name = name
       @status = status
+
+      @size = options[:size] || :regular
     end
 
     def status=(new_status)
@@ -24,6 +26,11 @@ module Fatcow
 
     def app=(new_app)
       @app = new_app
+      clear_document
+    end
+
+    def size=(new_size)
+      @size = new_size
       clear_document
     end
 
@@ -45,22 +52,28 @@ module Fatcow
 
     def asset_path
       return base_icon_path unless status
-      "/assets/normal/FatCow_Icons32x32/#{name}_#{status}.png" if status
+      "/assets/normal/#{subdirectory}/#{name}_#{status}.png" if status
     end
 
     def base_icon_path
-      "/assets/normal/FatCow_Icons32x32/#{name}.png"
+      "/assets/normal/#{subdirectory}/#{name}.png"
     end
 
     def bullet_icon_path
-      "/assets/normal/FatCow_Icons32x32/bullet_#{status}.png"
+      return "/assets/normal/#{subdirectory}/bullet_#{status}.png" if bullet_exists?
+      "/assets/normal/FatCow_Icons16x16/#{status}.png"
+    end
+
+    def bullet_exists?
+      bullets = %i[archive attach back bell brush bug bulb_off bulb_on burn camera cd chart code_red code connect database document down dvd edit excel find flash gear lightning link magnify medal office palette php powerpoint table textfield up valid vector word world user blue purple pink red orange yellow green white black add delete go error key wrench toggle_minus toggle_plus feed picture disk star arrow_bottom arrow_down arrow_left_2 arrow_left arrow_right_2 arrow_right arrow_top arrow_up]
+      bullets.include? status
     end
 
     def document
       return @document if @document
 
       @document ||= Nokogiri::HTML::Builder.new do |doc|
-        doc.div(class: "fatcow-icon fatcow-icon--#{name}") {
+        doc.div(class: container_class) {
           if status && composite?
             doc.parent << Nokogiri::HTML.fragment(@app.image_tag(base_icon_path))
             doc.parent << Nokogiri::HTML.fragment(@app.image_tag(bullet_icon_path, class: bullet_class))
@@ -77,10 +90,21 @@ module Fatcow
       @document = nil
     end
 
+    def container_class
+      return "fatcow-icon fatcow-icon--#{name}" if size == :regular
+      "fatcow-icon fatcow-icon--small fatcow-icon--#{name}"
+    end
+
     def bullet_class
       prealigned_bullets = %i[archive attach back bell brush bug bulb_off bulb_on burn camera cd chart code_red code connect database document down dvd edit excel find flash gear lightning link magnify medal office palette php powerpoint table textfield up valid vector word world user]
       return 'fatcow-icon__bullet fatcow-icon__bullet--pre-aligned' if prealigned_bullets.include? status
-      return 'fatcow-icon__bullet'
+      return 'fatcow-icon__bullet' if bullet_exists?
+      'fatcow-icon__bullet fatcow-icon__bullet--hack'
+    end
+
+    def subdirectory
+      return 'FatCow_Icons32x32' if size == :regular
+      'FatCow_Icons16x16'
     end
   end
 end

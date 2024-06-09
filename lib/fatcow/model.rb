@@ -16,18 +16,18 @@ module Fatcow
     }
 
     included do
-      def show_icon
+      def show_icon(**options)
         current_state = find_icon_status(:FATCOW_ICON_SHOW_STATUSES)
 
-        return custom_icon(current_state) if current_state
-        custom_icon(nil) if current_state.nil?
+        return custom_icon(current_state, **options) if current_state
+        custom_icon(nil, **options) if current_state.nil?
       end
 
-      def form_icon
+      def form_icon(**options)
         current_state = find_icon_status(:FATCOW_ICON_FORM_STATUSES)
 
-        return custom_icon(current_state) if current_state
-        custom_icon(nil) if current_state.nil?
+        return custom_icon(current_state, **options) if current_state
+        custom_icon(nil, **options) if current_state.nil?
       end
 
       def find_icon_status(statuses_const_key)
@@ -38,11 +38,12 @@ module Fatcow
         current_status[0]
       end
 
-      def custom_icon(status)
+      def custom_icon(status, **options)
         icon = self.class.const_get :FATCOW_ICON
 
         icon.app = self if icon.app.nil?
         icon.status = status if icon.status != status
+        icon.size = options[:size] if options[:size]
 
         icon
       end

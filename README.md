@@ -70,6 +70,9 @@ You cannot do this on collections, though that may be coming later.
 <%= @alert.show_icon %>
 ```
 
+## All Icons
+![a big list of icons](https://web.archive.org/web/20160324052646if_/http://www.fatcow.com/images/fatcow-icons/fatcow-3926.png)
+
 ## Licensing
 
 FatCow web icons are licensed under

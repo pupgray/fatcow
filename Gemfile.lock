@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fatcow (0.1.0)
+    fatcow (0.1.1)
       nokogiri (~> 1.8)
       rails (~> 7)
 

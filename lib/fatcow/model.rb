@@ -47,7 +47,7 @@ module Fatcow
         icon.app = self if icon.app.nil?
         icon.status = status if icon.status != status
         icon.size = options[:size] if options[:size] && icon.size != options[:size]
-        icon.size = :regular unless options[:size] && icon.size != :regular
+        icon.size = :regular if !options[:size] && icon.size != :regular
 
         icon
       end

@@ -12,6 +12,10 @@ module Fatcow
       ActiveSupport.on_load(:action_view) do
         include Fatcow::Helpers
       end
+
+      ActiveSupport.on_load(:active_record) do
+        include Fatcow::Model
+      end
     end
   end
 end

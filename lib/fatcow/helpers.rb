@@ -4,8 +4,8 @@ require_relative 'icon'
 
 module Fatcow
   module Helpers
-    def fci(name, status = nil)
-      Fatcow::Icon.new(self, name, status)
+    def fci(name, status = nil, **options)
+      Fatcow::Icon.new(self, name, status, **options)
     end
 
     def fatcow_style_tag

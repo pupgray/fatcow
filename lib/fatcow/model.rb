@@ -51,8 +51,8 @@ module Fatcow
     class_methods do
       def has_icon (icon_name, **statuses)
         const_set :FATCOW_ICON, Fatcow::Icon.new(nil, icon_name)
-        const_set :FATCOW_ICON_SHOW_STATUSES, (statuses[:show] || {}).dup.merge(DEFAULT_SHOW_STATUSES)
-        const_set :FATCOW_ICON_FORM_STATUSES, (statuses[:form] || {}).dup.merge(DEFAULT_FORM_STATUSES)
+        const_set :FATCOW_ICON_SHOW_STATUSES, DEFAULT_SHOW_STATUSES.dup.merge(statuses[:show] || {})
+        const_set :FATCOW_ICON_FORM_STATUSES, DEFAULT_FORM_STATUSES.dup.merge(statuses[:form] || {})
       end
     end
   end

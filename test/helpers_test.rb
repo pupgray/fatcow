@@ -27,4 +27,9 @@ class HelpersTest < ActionView::TestCase
     output = @view.fci(:bell, :arrow_left)
     assert_dom_equal %{<div class="fatcow-icon fatcow-icon--bell"><img src="/assets/normal/FatCow_Icons32x32/bell.png"><img class="fatcow-icon__bullet" src="/assets/normal/FatCow_Icons32x32/bullet_arrow_left.png"></div>}, output
   end
+
+  test "it can render an annotated icon with a bullet type that is prealigned" do
+    output = @view.fci(:bell, :lightning)
+    assert_dom_equal %{<div class="fatcow-icon fatcow-icon--bell"><img src="/assets/normal/FatCow_Icons32x32/bell.png"><img class="fatcow-icon__bullet fatcow-icon__bullet--pre-aligned" src="/assets/normal/FatCow_Icons32x32/bullet_lightning.png"></div>}, output
+  end
 end

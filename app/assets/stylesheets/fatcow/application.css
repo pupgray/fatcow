@@ -11,7 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= link_tree ../../images
  *= require_self
  */
 

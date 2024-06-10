@@ -7,7 +7,7 @@ module Fatcow
     isolate_namespace Fatcow
 
     initializer "fatcow.assets.precompile" do |app|
-      app.config.assets.precompile << 'fatcow/application.css'
+      app.config.assets.precompile << 'fatcow_manifest.js'
     end
 
     initializer "fatcow.view_helpers" do

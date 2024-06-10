@@ -1,5 +1,3 @@
 module Fatcow
-  VERSION = "0.1.6"
-
-  ASSET_ROOT = File.expand_path("assets", __dir__)
+  VERSION = "0.1.7"
 end

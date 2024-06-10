@@ -14,10 +14,12 @@ To install, simply add it to your gemfile,
 gem 'fatcow'
 ```
 
-then add the `fatcow_style_tag` helper to your `<head>` to include the basic stylesheet.
+then add the engine stylesheet to yours:
 
-```erbruby
-<%= fatcow_style_tag %>
+```css
+/*
+ *= require fatcow/application.css
+ */
 ```
 
 and you're good to go!

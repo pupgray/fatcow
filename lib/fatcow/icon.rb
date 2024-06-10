@@ -42,7 +42,7 @@ module Fatcow
 
     def composite?
       if status
-        file_exists = File.file? File.join(Fatcow::ASSET_ROOT, '../', asset_path)
+        file_exists = File.file? File.join(__dir__, '../../app/assets/images', asset_path)
 
         return !file_exists
       end
@@ -52,16 +52,16 @@ module Fatcow
 
     def asset_path
       return base_icon_path unless status
-      "/assets/normal/#{subdirectory}/#{name}_#{status}.png" if status
+      "fatcow/#{subdirectory}/#{name}_#{status}.png" if status
     end
 
     def base_icon_path
-      "/assets/normal/#{subdirectory}/#{name}.png"
+      "fatcow/#{subdirectory}/#{name}.png"
     end
 
     def bullet_icon_path
-      return "/assets/normal/#{subdirectory}/bullet_#{status}.png" if bullet_exists?
-      "/assets/normal/FatCow_Icons16x16/#{status}.png"
+      return "fatcow/#{subdirectory}/bullet_#{status}.png" if bullet_exists?
+      "fatcow/FatCow_Icons16x16/#{status}.png"
     end
 
     def bullet_exists?
@@ -75,10 +75,10 @@ module Fatcow
       @document ||= Nokogiri::HTML::Builder.new do |doc|
         doc.div(class: container_class) {
           if status && composite?
-            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(base_icon_path))
-            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(bullet_icon_path, class: bullet_class))
+            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(@app.image_url base_icon_path))
+            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(@app.image_url(bullet_icon_path), class: bullet_class))
           else
-            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(asset_path))
+            doc.parent << Nokogiri::HTML.fragment(@app.image_tag(@app.image_url asset_path))
           end
         }
       end.doc.root

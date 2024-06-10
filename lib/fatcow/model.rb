@@ -3,6 +3,7 @@
 module Fatcow
   module Model
     extend ActiveSupport::Concern
+    include ActionView::Helpers::AssetUrlHelper
     include ActionView::Helpers::AssetTagHelper
 
     DEFAULT_SHOW_STATUSES = {

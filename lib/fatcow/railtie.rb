@@ -3,9 +3,11 @@
 require_relative 'helpers'
 
 module Fatcow
-  class Railtie < ::Rails::Railtie
-    config.before_initialize do
-      config.assets.paths << ASSET_ROOT
+  class Railtie < ::Rails::Engine
+    isolate_namespace Fatcow
+
+    initializer "fatcow.assets.precompile" do |app|
+      app.config.assets.precompile << 'fatcow/application.css'
     end
 
     initializer "fatcow.view_helpers" do

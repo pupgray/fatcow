@@ -64,12 +64,12 @@ class Alert < ActiveRecord
 end
 ```
 
-Then, to show your icon in a view, just called either `#show_icon` (when showing the resource) or `#form_icon` (when
-displaying a form) on a record instance.
+Then, to show your icon in a view, just call either `#show_icon` (when showing the resource) or `#form_icon` (when
+displaying a form) on a record instance, and pass it to `fci`.
 You cannot do this on collections, though that may be coming later.
 
 ```erbruby
-<%= @alert.show_icon %>
+<%= fci @alert.show_icon %>
 ```
 
 ## All Icons

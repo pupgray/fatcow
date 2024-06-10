@@ -3,8 +3,6 @@
 module Fatcow
   module Model
     extend ActiveSupport::Concern
-    include ActionView::Helpers::AssetUrlHelper
-    include ActionView::Helpers::AssetTagHelper
 
     DEFAULT_SHOW_STATUSES = {
       add: -> { new_record? },
@@ -45,7 +43,6 @@ module Fatcow
       def custom_icon(status, **options)
         icon = self.class.const_get :FATCOW_ICON
 
-        icon.app = self if icon.app.nil?
         icon.status = status if icon.status != status
         icon.size = options[:size] if options[:size] && icon.size != options[:size]
         icon.size = :regular if !options[:size] && icon.size != :regular

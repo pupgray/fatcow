@@ -110,6 +110,7 @@ GEM
     marcel (1.0.4)
     mini_mime (1.1.5)
     minitest (5.23.1)
+    minitest-snapshots (1.1.0)
     mutex_m (0.2.0)
     net-imap (0.4.12)
       date
@@ -222,6 +223,7 @@ PLATFORMS
 
 DEPENDENCIES
   fatcow!
+  minitest-snapshots
   nokogiri
   puma
   sprockets-rails

@@ -24,7 +24,5 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace test runners here
-      - name: Set up tests
-        run: test/dummy/bin/setup
       - name: Run tests
         run: bin/test

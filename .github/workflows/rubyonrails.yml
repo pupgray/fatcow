@@ -24,5 +24,7 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace test runners here
+      - name: Set up tests
+        run: test/dummy/bin/rails db:prepare
       - name: Run tests
         run: bin/test

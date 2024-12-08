@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.md"]
   end
 
-  spec.add_dependency "rails", "~> 7"
+  spec.add_dependency "rails", "~> 8"
   spec.add_dependency "nokogiri", "~> 1.8"
 end

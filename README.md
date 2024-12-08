@@ -14,12 +14,10 @@ To install, simply add it to your gemfile,
 gem 'fatcow'
 ```
 
-then add the engine stylesheet to yours:
+then add the (optional) stylesheet to your template:
 
-```css
-/*
- *= require fatcow/application.css
- */
+```erbruby
+<%= stylesheet_link_tag 'fatcow/application', "data-turbo-track": "reload" %>
 ```
 
 and you're good to go!
